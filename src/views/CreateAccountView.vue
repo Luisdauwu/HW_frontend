@@ -1,4 +1,36 @@
-<script setup>
+<script>
+import axios from "axios";
+import { useToast } from "vue-toastification";
+import { useRouter } from 'vue-router'
+export default {
+  setup(){
+    const toast = useToast();
+    const router= useRouter();
+    return { toast, router }
+
+  },
+  data: () => ({
+    username: "",
+    password: "",
+  }),
+  methods:{
+    signUp(){
+      console.log(this.username, this.password)
+      axios.post("http://127.0.0.1:8000/signup",
+        {
+          username:this.username,
+          password:this.password
+        }
+      ).then(response=>{
+        this.toast.success("Registro realizado con exito!")
+        this.router.push("/login")
+      }).catch(error=>{
+        console.log(error)
+        this.toast.error(error.response.data.detail)
+      })
+    }
+  }
+}
 </script>
 
 <template>
@@ -11,7 +43,7 @@
             <input type="email" v-model="username" placeholder="Username" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
           <div id="searchBarPass">
             <input type="password" v-model="password" placeholder="Password">
-            <button class="Submit-button" v-on:click="login">
+            <button class="Submit-button" v-on:click="signUp">
               <span class="Submit-button-text">Sign up</span>
             </button>
         </div>

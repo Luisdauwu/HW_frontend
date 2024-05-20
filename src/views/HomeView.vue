@@ -219,14 +219,24 @@ body {
   border: 1px solid white;
   border-radius: 50px;
   background-color: white;
+  border-color: white;
   position: relative;
   top: 200%;
   z-index: 5;
-  transition-duration: 500ms;
   font-family: 'Bebas Neue', sans-serif;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
   
 
   }
+.left4-text:hover{
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  border-color: #23c483;
+  color: #fff;
+  transform: translateY(-1px);
+  }
+
 
 
 .diagonal-rectangle {

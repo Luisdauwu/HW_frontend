@@ -16,7 +16,7 @@ export default {
   methods:{
     login(){
       console.log(this.username, this.password)
-      axios.post("http://127.0.0.1:8000/auth",
+      axios.post("https://hw-backend-1-dolq.onrender.com/auth",
         {
           username:this.username,
           password:this.password
@@ -307,9 +307,13 @@ export default {
 }
 
         .Create-button:hover {
-            background-color: rgb(103, 187, 243);
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-            color: white; /* Cambia el color del texto */
+          background: #03d0f4;
+          color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 5px #03d0f4,
+                      0 0 25px #03d0f4,
+                      0 0 50px #03d0f4,
+                      0 0 100px #03d0f4;
 
 
         }
