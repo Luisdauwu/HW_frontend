@@ -11,7 +11,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("https://hw-backend-1-dolq.onrender.com/cars")
+    axios.get("https://hw-backend-2sgk.onrender.com/cars")
       .then(response => {
         this.cars = response.data.data;
         console.log(this.cars)

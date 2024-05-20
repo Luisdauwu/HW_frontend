@@ -16,7 +16,7 @@ export default {
   methods:{
     login(){
       console.log(this.username, this.password)
-      axios.post("https://hw-backend-1-dolq.onrender.com/auth",
+      axios.post("https://hw-backend-2sgk.onrender.com/auth",
         {
           username:this.username,
           password:this.password
