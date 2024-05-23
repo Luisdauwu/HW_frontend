@@ -139,4 +139,33 @@ body {
   color: white;
   font-size: 14px;
 }
+.navigate-button {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: relative;
+  left: 42%;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  z-index: 4;
+  top: -60px;
+  
+}
+.navigate-button:hover {
+  background: #e22424;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #dd0e0e,
+              0 0 25px #dd0e0e,
+              0 0 50px #dd0e0e,
+              0 0 100px #dd0e0e;
+}
+.navigate-button a {
+  color: #000000; /* Reemplaza esto con el color del enlace de router-link */
+}
+
 </style>
