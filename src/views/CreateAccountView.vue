@@ -15,17 +15,17 @@ export default {
   }),
   methods:{
     signUp(){
-      console.log(this.username, this.password)
-      axios.post("http://127.0.0.1:8000/signup",
+      axios.post("https://hw-backend-2sgk.onrender.com/signup",
         {
           username:this.username,
-          password:this.password
+          password:this.password,
+          role: "None"
+
         }
       ).then(response=>{
         this.toast.success("Registro realizado con exito!")
         this.router.push("/login")
       }).catch(error=>{
-        console.log(error)
         this.toast.error(error.response.data.detail)
       })
     }

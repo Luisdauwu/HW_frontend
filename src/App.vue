@@ -13,6 +13,7 @@ export default {
     return {
       logged: Boolean(sessionStorage.getItem("access_token")),
       username:"",
+      role: false
     };
   },
   mounted(){
@@ -20,6 +21,8 @@ export default {
     if(token){
       const decoded = VueJwtDecode.decode(token);
       this.username = decoded.username
+      this.role = decoded.role==="admin"
+      console.log(this.role)
     }
   },
    methods:{
@@ -27,11 +30,44 @@ export default {
       sessionStorage.removeItem("access_token") 
       this.toast.info("Cerraste sesion!")
       this.logged=false
+      this.role= false
       
     }
-        }
-      }
-    
+        },
+        addCar() {
+      axios.post("https://hw-backend-2sgk.onrender.com/cars", {
+        brand: this.carBrand,
+        model: this.carModel,
+        year: this.carYear,
+        price: this.carPrice,
+        mileage: this.carMileage,
+        color: this.carColor,
+        image_principal: this.carImage,
+        descripcion: this.carDescription,
+        urlShop: this.carUrl
+      })
+      .then(response => {
+        this.toast.success("Auto agregado con éxito");
+        this.fetchCars();
+      })
+      .catch(error => {
+        console.log(error);
+        this.toast.error("Error al agregar el auto");
+      });
+    },
+    deleteCar(carId) {
+      axios.delete(`https://hw-backend-2sgk.onrender.com/cars/${carId}`)
+      .then(response => {
+        this.toast.success("Auto eliminado con éxito");
+        this.fetchCars();
+      })
+      .catch(error => {
+        console.log(error);
+        this.toast.error("Error al eliminar el auto");
+      });
+    }
+  }
+       
 </script>
 
 <template>
@@ -61,7 +97,12 @@ export default {
       <img src="./assets/HW_logo.png" alt="Brillando"> 
   
     </div>
-
+    <div  v-if="role" id="home">
+      <button @click="goToInventory" class="navigate-button">
+        <router-link to="/inventory" >Inventario</router-link></button>
+      
+  
+    </div>
   </header>
 
   <RouterView />
@@ -196,31 +237,6 @@ export default {
     .brandTextLeft3:hover,
     .brandTextRight:hover {
       background-color: #333;
-    }
-
-    #searchBar {
-      margin-top: 20px;
-      margin-left: 20px;
-      width: 220px;
-      height: 40px;
-      padding: 0px;
-      border: 6px solid #fff;
-      border-radius: 50px;
-      color: #000000;
-      position: center;
-      /* Permite controlar el z-index */
-      z-index: 2;
-      /* Coloca la barra de búsqueda encima del fondo */
-      background-color: #fff;
-    }
-
-    #searchBar input {
-      background-color: white;
-      border: none;
-      outline: none;
-      color: #000000;
-      width: 98%;
-      height: 24px;
     }
 
     .left-text {
@@ -460,6 +476,7 @@ export default {
       width: 20vh;
       border-radius: 40px;
       transition-duration: .3s;
+      left: 260px;
     }
     
     .Btn:hover .sign {
@@ -478,4 +495,108 @@ export default {
     .Btn:active {
       transform: translate(2px ,2px);
     }
+    .navigate-button {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      position: absolute;
+      margin-top: -47%;
+      left: 90%;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      z-index: 4;
+    }
+    
+    .navigate-button:hover {
+      background: #03f40f;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #03f40f, 0 0 25px #03f40f, 0 0 50px #03f40f, 0 0 100px #03f40f;
+    }
+    
+    .input {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+      background-color: #0D1117;
+      justify-content: center;
+      border-radius: 5px;
+    }
+    
+    .value {
+      background-color: transparent;
+      border: none;
+      padding: 10px;
+      color: white;
+      display: flex;
+      position: relative;
+      gap: 5px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .value:not(:active):hover,
+    .value:focus {
+      background-color: #21262C;
+    }
+    
+    .value:focus,
+    .value:active {
+      background-color: #1A1F24;
+      outline: none;
+    }
+    
+    .value::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: -10px;
+      width: 5px;
+      height: 80%;
+      background-color: #2F81F7;
+      border-radius: 5px;
+      opacity: 0;
+    }
+    
+    .value:focus::before,
+    .value:active::before {
+      opacity: 1;
+    }
+    
+    .value svg {
+      width: 15px;
+    }
+    .navigate-button {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      position: relative;
+      left: 42%;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      z-index: 4;
+      top: -60px;
+      
+    }
+    .navigate-button:hover {
+      background: #e22424;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #dd0e0e,
+                  0 0 25px #dd0e0e,
+                  0 0 50px #dd0e0e,
+                  0 0 100px #dd0e0e;
+    }
+    .navigate-button a {
+      color: #000000; /* Reemplaza esto con el color del enlace de router-link */
+    }
+    
 </style>

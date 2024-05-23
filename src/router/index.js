@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import CarsView from '../views/CarsView.vue'
 import LoginView from '../views/LoginView.vue'
 import CreateAccountView from '../views/CreateAccountView.vue'
+import CarsInventoryView from '../views/CarsInventoryView.vue'
+import BuyCarsView from '../views/BuyCarsView.vue'
 
 
 
@@ -34,10 +36,19 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: CreateAccountView,
+    },
+
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: CarsInventoryView,
+    },
+    {
+      path: '/buycars',
+      name: 'buycars',
+      component: BuyCarsView,
     }
   ]
-
 })
-
 
 export default router

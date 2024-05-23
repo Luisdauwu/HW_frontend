@@ -12,6 +12,8 @@ export default {
   data: () => ({
     username: "",
     password: "",
+    role:""
+
   }),
   methods:{
     login(){
@@ -19,7 +21,7 @@ export default {
       axios.post("https://hw-backend-2sgk.onrender.com/auth",
         {
           username:this.username,
-          password:this.password
+          password:this.password,
         }
       ).then(response=>{
         this.toast.success("Login realizado con exito!")
@@ -41,9 +43,9 @@ export default {
 <div class="diagonal-rectangle">
     <img id="LoginLogo" src="../assets/HW_logo.png" alt="Hotwheels Logo">
     <div id="searchBar">
-        <input type="email" v-model="username" placeholder="Username" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <input type="email" v-model="username" placeholder="Username" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" >
       <div id="searchBarPass">
-        <input type="password" v-model="password" placeholder="Password">
+        <input type="password" required v-model="password" placeholder="Password">
         <button class="Submit-button" v-on:click="login">
           <span class="Submit-button-text">Login</span>
         </button>
