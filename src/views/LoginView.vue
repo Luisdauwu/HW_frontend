@@ -25,7 +25,9 @@ export default {
         }
       ).then(response=>{
         this.toast.success("Login realizado con exito!")
-        this.router.go("/cars")
+        setTimeout(() => {
+          this.router.go()
+        }, 2000);
         sessionStorage.setItem("access_token", response.data.token)
       }).catch(error=>{
         this.toast.error("Usuario o contraseña incorrecto!")
